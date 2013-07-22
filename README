@@ -1,0 +1,55 @@
+This is a *minimal* demo of WebRTC video calling between two browsers.
+Because the signalling layer isn't standardized, you'll need to run a
+small node.js server to pass signalling messages between the two
+browsers.  The media connections are point-to-point, though, once the
+signalling has happened no server is required.
+
+This demo is based on Silvia Pfeiffer's WebRTC via Web Sockets demo,
+and Muaz Khan's WebRTC-Experiment websocket-over-nodejs demo.
+Silvia's demo became obsolete (it uses ROAP signalling while JSEP is
+now the standard) and Muaz's demo was more complex than I liked which
+made it difficult to figure out what the WebRTC API's were doing.
+Both of their code was very helpful to me, though!
+
+Silvia's Blog post:
+http://blog.gingertech.net/2012/06/04/video-conferencing-in-html5-webrtc-via-web-sockets/
+
+Muaz's WebRTC Experiments web site:
+https://www.webrtc-experiment.com/
+
+Muaz's WebSocket over Node.js demo:
+https://github.com/muaz-khan/WebRTC-Experiment/tree/master/websocket-over-nodejs
+
+Installation:
+
+Install node.js from http://nodejs.org
+
+Install Node's websocket package:
+$ npm install websocket
+
+Install the node-static package to serve static files:
+$ npm install node-static
+
+Usage:
+
+Run the Node server:
+$ node websocket-server.js
+
+Point two browsers at http://your-server-address:1337/.  You'll be
+prompted to allow the use of your camera and microphone.
+
+One of the browsers clicks "Call" and the call should be set up.
+
+To close the call just reload the page.  Like I said: this is a
+minimal demo.
+
+Debugging the Node Server:
+  install https://github.com/node-inspector/node-inspector
+  run the node app in debug mode (will stop at the first line)
+  $ node --debug-brk websocket-server.js
+  then in another terminal
+  $ node node_modules/node-inspector/bin/inspector.js
+   - or -
+  $ node_modules/.bin/node-inspector
+  open chrome to http://127.0.0.1:8080/debug?port=5858
+  step once to go to the first line of the program

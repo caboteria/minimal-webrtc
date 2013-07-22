@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example WebRTC Point-to-point Video</title>
+    <style>
+      #video {
+      position: relative;
+      }
+      #local-video {
+      left: 0;
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Example WebRTC Point-to-point Video</h1>
+    <table class="visible">
+      <tr><td><button id="call" onClick="callPeer.initiateCall(config.localStream)">Call</button></td></tr>
+    </table>
+    <div id="video">
+      <video id="remote-video" autoplay="true" controls="true" width="480" height="360"></video>
+      <video id="local-video" autoplay="true" controls="true" muted="true" width="160" height="120"></video>
+    </div>
+    <script src="PeerConnection.js" type="text/javascript"></script>
+    <script src="call.js" type="text/javascript"></script>
+    <script type="text/javascript">
+// temporary kludge to paper over browser differences
+navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+var config = {
+    video: document.getElementById('remote-video'),
+};
+
+navigator.getUserMedia({
+        audio: true,
+        video: true
+    },
+    function (localStream) {
+        video = document.getElementById('local-video');
+        video['src'] = URL.createObjectURL(localStream);
+        config.localStream = localStream;
+    },
+    function (e) { console.error(e); }
+);
+
+var callPeer = call(config);
+    </script>
+  </body>
+</html>
