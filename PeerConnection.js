@@ -48,7 +48,7 @@ var PeerConnection = function (options) {
             peerConnection.createOffer(function (sessionDescription) {
                 peerConnection.setLocalDescription(sessionDescription);
                 callback(sessionDescription);
-            }, null, constraints);
+            }, function(e){throw e}, constraints);
         },
 
         createAnswer: function (offerSDP, callback) {
@@ -56,7 +56,7 @@ var PeerConnection = function (options) {
             peerConnection.createAnswer(function (sessionDescription) {
                 peerConnection.setLocalDescription(sessionDescription);
                 callback(sessionDescription);
-            }, null, constraints);
+            }, function(e){throw e}, constraints);
         },
 
         setRemoteDescription: function (sdp) {

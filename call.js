@@ -57,7 +57,7 @@ var call = function (config) {
             },
             onaddstream: function (stream) {
                 console.log("onRemoteStream");
-                config.video['src'] = URL.createObjectURL(stream);
+                config.video.srcObject = stream;
             }
         };
     }

@@ -39,7 +39,7 @@ navigator.getUserMedia({
     },
     function (localStream) {
         video = document.getElementById('local-video');
-        video['src'] = URL.createObjectURL(localStream);
+        video.srcObject = localStream;
         config.localStream = localStream;
     },
     function (e) { console.error(e); }
